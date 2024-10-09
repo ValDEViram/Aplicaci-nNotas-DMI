@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { BuscarSVG } from "../assets/Svg/BuscarSVG";
+import { BuscarSVG } from "./Icons";
 
 export function Main() {
   const insets = useSafeAreaInsets();

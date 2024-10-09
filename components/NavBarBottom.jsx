@@ -1,9 +1,11 @@
 import { StyleSheet, Text, View } from "react-native";
-import { HomeSVG } from "../assets/Svg/Home";
-import { ActividadesSVG } from "../assets/Svg/ActividadesSVG";
-import { MasSVG } from "../assets/Svg/MasSVG";
-import { LogrosSVG } from "../assets/Svg/LogrosSVG";
-import { ConfigureSVG } from "../assets/Svg/SettingsSVG";
+import {
+  ActividadesSVG,
+  HomeSVG,
+  LogrosSVG,
+  MasSVG,
+  SettingsSVG,
+} from "./Icons";
 
 export function NavBarBottom() {
   return (
@@ -24,7 +26,7 @@ export function NavBarBottom() {
         <Text style={styles.navText}>Logros</Text>
       </View>
       <View style={styles.navButton}>
-        <ConfigureSVG />
+        <SettingsSVG />
         <Text style={styles.navText}>Configuración</Text>
       </View>
     </View>
