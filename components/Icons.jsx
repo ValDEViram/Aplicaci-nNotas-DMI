@@ -1,4 +1,13 @@
 import Svg, { Path } from "react-native-svg";
+import { MaterialIcons } from "@expo/vector-icons";
+
+export const Checkbox = (props) => {
+  <MaterialIcons name="check-box" size={24} color="green" />;
+};
+
+export const CheckboxOutline = (props) => {
+  <MaterialIcons name="check-box-outline-blank" size={24} color="gray" />;
+};
 
 export const ActividadesSVG = (props) => (
   <Svg
@@ -6,7 +15,7 @@ export const ActividadesSVG = (props) => (
     width={30}
     height={30}
     fill="none"
-    stroke="#B1B79F"
+    stroke="currentColor"
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeWidth={2}
@@ -42,7 +51,7 @@ export const HomeSVG = (props) => (
     xmlns="http://www.w3.org/2000/svg"
     width={30}
     height={30}
-    fill="#B1B79F"
+    fill="currentColor"
     className="icon icon-tabler icons-tabler-filled icon-tabler-home"
     viewBox="0 0 24 24"
     {...props}
@@ -57,7 +66,7 @@ export const LogrosSVG = (props) => (
     xmlns="http://www.w3.org/2000/svg"
     width={30}
     height={30}
-    fill="#B1B79F"
+    fill="currentColor"
     className="icon icon-tabler icons-tabler-filled icon-tabler-award"
     viewBox="0 0 24 24"
     {...props}
@@ -73,7 +82,7 @@ export const MasSVG = (props) => (
     width={35}
     height={35}
     fill="none"
-    stroke="#B1B79F"
+    stroke="currentColor"
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeWidth={2}
@@ -92,7 +101,7 @@ export const SettingsSVG = (props) => (
     width={30}
     height={30}
     fill="none"
-    stroke="#B1B79F"
+    stroke="currentColor"
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeWidth={2}

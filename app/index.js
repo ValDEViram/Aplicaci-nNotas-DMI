@@ -1,7 +1,7 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { Link } from "expo-router";
 
-export default function Index(){
+export default function Index() {
   return (
     <View>
       <Text>index</Text>
@@ -17,12 +17,11 @@ export default function Index(){
       </Link>
     </View>
   );
-};
-
+}
 
 const styles = StyleSheet.create({
   botonLink: {
     fontSize: 50,
     fontWeight: "bold",
-  }
+  },
 });
