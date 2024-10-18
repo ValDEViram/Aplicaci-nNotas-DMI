@@ -9,10 +9,11 @@ import {
 import { Link } from "expo-router";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import { registerUser } from "../(services)/api/api";
+import { registerUser } from "./(services)/api/api";
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import { MaterialIcons } from "@expo/vector-icons";
+import { LogoSVG } from "../components/Icons";
 
 const validationSchema = Yup.object().shape({
   username: Yup.string()
@@ -42,11 +43,13 @@ export default function Register() {
   console.log(mutation);
 
   return (
-    <View>
-      <Text>Registrarse</Text>
-      <Link style={styles.botonLink} href="/">
-        Volver
-      </Link>
+    <View style={styles.container}>
+
+      <View style={styles.LogoContainer}>
+        <LogoSVG color={"#949c7f"}/>
+        <Text style={styles.Logo}>Progrezy</Text>
+      </View>
+      
 
       {mutation?.isError && (
         <Text>{mutation?.error?.response?.data?.message}</Text>
@@ -77,6 +80,7 @@ export default function Register() {
           touched,
         }) => (
           <View style={styles.form}>
+            <Text style={styles.title}>Registrarse</Text>
             <TextInput
               style={styles.input}
               placeholder="Nombre de usuario"
@@ -164,32 +168,92 @@ export default function Register() {
 }
 
 const styles = StyleSheet.create({
-  botonLink: {
-    fontSize: 50,
-    fontWeight: "bold",
+  LogoContainer:{ 
+    backgroundColor: "#FFF",
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: 30,
+    paddingVertical: 5,
+    borderRadius: 25,
+    shadowColor: '#35392e',
+    shadowOffset: {width: 0, height:8},
+    shadowOpacity: 0.5,
+    shadowRadius: 3,
+    backgroundColor: "#cfd3c3"
   },
-  buttonDisabled: {
-    backgroundColor: "pink",
-    fontSize: 100,
+  Logo: {
+    fontSize: 50,
+    color: "#35392e",
+    fontWeight: "bold",
+
+  },
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#F4F5F0",
+    gap: 30
+  }, 
+  title: {
+    color: "#301D18",
+    fontSize: 24,
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  form: {
+    gap: 15,
+    backgroundColor: "#F4F5F0",
+    padding: 20,
+    borderRadius: 12
+  },
+  botonLink: {
+    fontSize: 500,
+    fontWeight: "bold",
   },
   button: {
-    backgroundColor: "blue",
-    borderWidth: 5,
-    borderColor: "#3D4133",
-    padding: 5,
-    paddingLeft: 10,
-    color: "pink",
+    borderWidth: 2,
+    borderRadius: 8,
+    backgroundColor: "#AAB396",
+    borderColor: "#494F3C",
+    paddingVertical: 12,
     flexDirection: "row",
     justifyContent: "center",
-    gap: 5,
-    marginVertical: 20,
+    marginTop: 15,
+    shadowColor: 'black',
+    shadowOffset: {width: 2, height:4},
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+  },
+  buttonText: {
+    color: "#301D18",
+    fontSize: 18,
+    fontWeight: "bold",
   },
   input: {
-    fontSize: 20,
+    color: "#778062",
+    fontSize: 16,
     fontWeight: "bold",
-    margin: 10,
-    borderWidth: 1,
-    padding: 5,
+    paddingVertical: 8,
+    paddingHorizontal: 20,
+    borderWidth: 2,
+    borderRadius: 8,
+    borderColor: "#494F3C",
+    backgroundColor: "#FFFF",
+    shadowColor: 'black',
+    shadowOffset: {width: 2, height:4},
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+  },
+  texto: {
+    color: "#778062",
+  },
+  link: {
+    color: "#494F3C",
+    fontWeight: "bold",
+    textDecorationLine: "underline"
+  },
+  errorText: {
+    color: "red"
   },
   checkboxContainer: {
     flexDirection: "row",
@@ -204,3 +268,4 @@ const styles = StyleSheet.create({
     textDecorationLine: "underline",
   },
 });
+

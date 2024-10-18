@@ -1,4 +1,4 @@
-import { Stack } from "expo-router";
+import { Slot, Stack } from "expo-router";
 import { loadUser } from "./authSlice";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
@@ -9,7 +9,7 @@ const AppWrapper = () => {
   useEffect(() => {
     dispatch(loadUser);
   }, [dispatch]);
-  return <Stack />;
+  return <Slot />;
 };
 
 export default AppWrapper;

@@ -39,10 +39,7 @@ export default function Login() {
   console.log(mutation);
   return (
     <View>
-      <Text>login</Text>
-      <Link style={styles.botonLink} href="/">
-        Volver
-      </Link>
+      <Text style={styles.title}>Inicio de sesión</Text>
 
       {mutation?.isError && <Text>Credenciales invalidas</Text>}
       {mutation?.isSuccess && <Text>Inicio de sesión correcto</Text>}
@@ -109,6 +106,12 @@ export default function Login() {
 }
 
 const styles = StyleSheet.create({
+  title: {
+    color: "#301D18",
+    fontSize: 25,
+    marginBottom: 10,
+    fontWeight: "bold",
+  },
   botonLink: {
     fontSize: 50,
     fontWeight: "bold",

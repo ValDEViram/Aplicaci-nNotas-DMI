@@ -28,6 +28,26 @@ export const ActividadesSVG = (props) => (
   </Svg>
 );
 
+export const LogoSVG = (props) => (
+  <Svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={40}
+    height={40}
+    fill="none"
+    stroke="currentColor"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    strokeWidth={2}
+    className="icon icon-tabler icons-tabler-outline icon-tabler-file-stack"
+    viewBox="0 0 24 24"
+    {...props}
+  >
+    <Path stroke="none" d="M0 0h24v24H0z" />
+    <Path d="M14 3v4a1 1 0 0 0 1 1h4" />
+    <Path d="M5 12V5a2 2 0 0 1 2-2h7l5 5v4M5 21h14M5 18h14M5 15h14" />
+  </Svg>
+);
+
 export const BuscarSVG = (props) => (
   <Svg
     xmlns="http://www.w3.org/2000/svg"
