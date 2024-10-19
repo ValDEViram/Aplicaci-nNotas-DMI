@@ -1,5 +1,4 @@
 import { Tabs } from "expo-router";
-import { ActividadesSVG, BuscarSVG } from "../../components/Icons";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
 export default function RootLayout() {
@@ -33,7 +32,7 @@ export default function RootLayout() {
         options={{
           headerShown: false,
           title: "Actividades",
-          tabBarIcon: ({ color }) => <ActividadesSVG stroke={color} />,
+          tabBarIcon: ({ color }) => <BuscarSVG color={color} />,
         }}
       />
     </Tabs>

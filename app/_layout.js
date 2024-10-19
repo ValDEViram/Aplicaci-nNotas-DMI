@@ -1,5 +1,5 @@
-import { Stack } from "expo-router";
-import { StyleSheet } from "react-native";
+// import { Stack } from "expo-router";
+// import { StyleSheet } from "react-native";
 import queryClient from "./(services)/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import AppWrapper from "./(services)/(redux)/appWrapper";
@@ -15,9 +15,3 @@ export default function layout() {
     </Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  body: {
-    backgroundColor: "black",
-  },
-});

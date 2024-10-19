@@ -11,7 +11,8 @@ const getUser = async () =>{
 }
 
 const initialState = {
-  user: null
+  user: null,
+  loading: true,
 }
 
 const authSlice = createSlice({
@@ -20,26 +21,35 @@ const authSlice = createSlice({
   reducers:{
     loginUserAction: (state,action) =>{
       state.user = action.payload
+      state.loading = false
       AsyncStorage.setItem("userInfo", JSON.stringify(action.payload))
     },
     logoutAction: (state, action) =>{
       state.user = null
+      state.loading = false
       AsyncStorage.removeItem("userInfo")
     },
     setUserAction: (state, action)=>{
       state.user = action.payload
-    }
+      state.loading = false;
+    },
+    setLoading: (state, action) => {
+      state.loading = action.payload;
+    },
   }
 })
 
 
-export const {loginUserAction, logoutAction, setUserAction} = authSlice.actions
+export const { loginUserAction, logoutAction, setUserAction, setLoading } =
+  authSlice.actions;
 
 export const authReducer = authSlice.reducer
 
 export const loadUser = () => async (dispatch) =>{
-  const userInfo = await getUser();
-  if (userInfo){
-    dispatch(setUserAction(userInfo))
+  const user = await getUser();
+  if (user){
+    dispatch(setUserAction(user))
+  }else {
+    dispatch(setLoading(false));
   }
 }

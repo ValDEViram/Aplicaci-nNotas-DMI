@@ -10,10 +10,11 @@ import { Link, useRouter } from "expo-router";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { useMutation } from "@tanstack/react-query";
-import { loginUser } from "./(services)/api/api";
+import { loginUser, getUsers } from "./(services)/api/api";
 import { loginUserAction } from "./(services)/(redux)/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { LogoSVG } from "../components/Icons";
+import { useEffect, useState } from "react";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -27,6 +28,24 @@ const validationSchema = Yup.object().shape({
 });
 
 export default function Index() {
+  // const [users, setUsers] = useState([])
+  // useEffect(() =>{
+  //   const fetchUsers = async() =>{
+  //     try{
+  //       const userData = await getUsers()
+  //       setUsers(userData)
+  //     }catch(error){
+  //       console.log("Error al conseguir los datos", error)
+  //     }
+  //   }
+  //   fetchUsers()
+  // },[])
+
+  //   // Monitorear cuando el estado de los usuarios cambie
+  // useEffect(() => {
+  //   console.log("Usuarios actualizados:", users);
+  // }, [users]);
+  
   const router = useRouter();
 
   const mutation = useMutation({
@@ -41,22 +60,43 @@ export default function Index() {
 
   return (
     <View style={styles.container}>
+      {/* {
+        users.length > 0 ? (
+        users.map((user) => (
+          <View key={user._id}>
+            <Text style={{color:"black"}}>{user.username}</Text>
+            <Text>{user.email}</Text>
+          </View>
+        ))
+      )
+        : (<Text>Usuarios no encontrados</Text>)
+      } */}
+
       <View style={styles.LogoContainer}>
         <LogoSVG color={"#949c7f"}/>
         <Text style={styles.Logo}>Progrezy</Text>
       </View>
       
-      {mutation?.isError && <Text>Credenciales invalidas</Text>}
+      {mutation?.isError && (
+        <Text>
+          {mutation?.error?.response?.data?.error || 'Ocurrió un error inesperado'}
+        </Text>
+      )}
       {mutation?.isSuccess && <Text>Inicio de sesión correcto</Text>}
 
       <Formik
-        initialValues={{ email: "juan@gmail.com", password: "12345678" }}
+        initialValues={{ email: "", password: "" }}
         onSubmit={(values) => {
           console.log(values);
           mutation.mutateAsync(values).then((data) => {
-            dispatch(loginUserAction(data));
-            router.push("/(tabs)");
-            console.log(data);
+            if (data.user.rol === "Usuario") {
+              dispatch(loginUserAction(data));
+              router.push("/(users)")
+            }
+            else{
+              router.push("/CondicionesUso/terms");
+              console.log(data);
+            }
           });
         }}
         validationSchema={validationSchema}
@@ -99,7 +139,7 @@ export default function Index() {
               disabled={mutation?.isPending}
             >
               {mutation?.isPending ? (
-                <ActivityIndicator color="pink" />
+                <ActivityIndicator color="#494F3C" />
               ) : (
                 <Text style={styles.buttonText}>Iniciar sesión</Text>
               )}

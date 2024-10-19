@@ -13,7 +13,7 @@ import { registerUser } from "./(services)/api/api";
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import { MaterialIcons } from "@expo/vector-icons";
-import { LogoSVG } from "../components/Icons";
+import { LeftArrow, LogoSVG } from "../components/Icons";
 
 const validationSchema = Yup.object().shape({
   username: Yup.string()
@@ -43,7 +43,9 @@ export default function Register() {
   console.log(mutation);
 
   return (
+    <>
     <View style={styles.container}>
+    <Link href="/" style={{padding: 10, position:"absolute", left: 0, top: 0}}><LeftArrow stroke={"#949c7f"}/></Link>
 
       <View style={styles.LogoContainer}>
         <LogoSVG color={"#949c7f"}/>
@@ -68,7 +70,7 @@ export default function Register() {
             .catch((error) => {
               console.log(error);
             });
-        }}
+          }}
         validationSchema={validationSchema}
       >
         {({
@@ -87,7 +89,7 @@ export default function Register() {
               onChangeText={handleChange("username")}
               onBlur={handleBlur("username")}
               value={values.username}
-            />
+              />
             {errors.username && touched.username ? (
               <Text style={styles.errorText}>{errors.username}</Text>
             ) : null}
@@ -98,7 +100,7 @@ export default function Register() {
               onBlur={handleBlur("email")}
               value={values.email}
               keyboardType="email-address"
-            />
+              />
             {errors.email && touched.email ? (
               <Text style={styles.errorText}>{errors.email}</Text>
             ) : null}
@@ -109,7 +111,7 @@ export default function Register() {
               onBlur={handleBlur("password")}
               value={values.password}
               secureTextEntry
-            />
+              />
             {errors.password && touched.password ? (
               <Text style={styles.errorText}>{errors.password}</Text>
             ) : null}
@@ -130,14 +132,14 @@ export default function Register() {
               <Pressable
                 onPress={() => setIsTermsAccepted(!isTermsAccepted)}
                 style={styles.checkbox}
-              >
+                >
                 {isTermsAccepted ? (
                   <MaterialIcons name="check-box" size={24} color="green" />
                 ) : (
                   <MaterialIcons
-                    name="check-box-outline-blank"
-                    size={24}
-                    color="gray"
+                  name="check-box-outline-blank"
+                  size={24}
+                  color="gray"
                   />
                 )}
               </Pressable>
@@ -164,12 +166,12 @@ export default function Register() {
         )}
       </Formik>
     </View>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
   LogoContainer:{ 
-    backgroundColor: "#FFF",
     flexDirection: "row",
     alignItems: "center",
     paddingHorizontal: 30,
@@ -267,5 +269,8 @@ const styles = StyleSheet.create({
     color: "blue",
     textDecorationLine: "underline",
   },
+  buttonDisabled: {
+    backgroundColor: "#f4f5f0"
+  }
 });
 
