@@ -1,8 +1,11 @@
 import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function Terms() {
+  const insets = useSafeAreaInsets()
+
   return (
-    <View style={styles.container}>
+    <View style={[{ paddingTop: insets.top, paddingBottom: insets.bottom }, styles.container]}>
       <ScrollView >
       <Text style={styles.title}>Aviso de Consentimiento</Text>
       <Text style={styles.subtitulo}>

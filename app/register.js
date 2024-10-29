@@ -57,12 +57,14 @@ export default function Register() {
       
 
       {mutation?.isError && (
-        <Text>{mutation?.error?.response?.data?.message}</Text>
+        <Text style={styles.errorText}>
+          {mutation?.error?.response?.data?.error || 'Ocurrió un error inesperado'}
+        </Text>
       )}
       {mutation?.isSuccess && <Text>Registro de usuario correcto</Text>}
 
       <Formik
-        initialValues={{ username: "", email: "", password: "", password: "" }}
+        initialValues={{ username: "", email: "", password: "", confirmPassword: "" }}
         onSubmit={(values) => {
           console.log(values);
           mutation
@@ -133,7 +135,7 @@ export default function Register() {
 
             <CheckboxComponent
               text="Acepto los"
-              link={{ href: "/CondicionesUso/terms", text: " términos y condiciones" }}
+              link={{ href: "/pages/terms", text: " términos y condiciones" }}
               onToggle={handleToggle}
             />
 
@@ -243,7 +245,6 @@ const styles = StyleSheet.create({
   errorText: {
     color: "red"
   },
-
   buttonDisabled: {
     backgroundColor: "#f4f5f0"
   }

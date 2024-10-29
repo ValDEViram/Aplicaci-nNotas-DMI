@@ -7,8 +7,9 @@ import {
   ScrollView,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { RightArrow } from "./Icons";
+import { MasSVG, RightArrow } from "./Icons";
 import { CheckboxComponent } from "./CheckboxComponent";
+import { Link } from "expo-router";
 const { width } = Dimensions.get("window");
 
 export function MyActivities() {
@@ -19,27 +20,55 @@ export function MyActivities() {
       <View style={[styles.container, width]}>
         <Text style={styles.title}>Mis actividades</Text>
         <ScrollView>
-          <Text style={styles.subtitulo}>Actividades recientes</Text>
+          <View
+            style={{
+              alignItems: "center",
+              backgroundColor: "#778062",
+              borderRadius: 8,
+              marginBottom: 20,
+            }}
+          >
+            <Link
+              href={"/pages/addActivity"}
+              style={{ display: "flex", alignItems: "center", gap: 10 }}
+            >
+              <MasSVG stroke={"#F4F5F0"} />
+              <Text style={{ color: "#F4F5F0", fontSize: 18 }}>
+                Añadir actividad
+              </Text>
+            </Link>
+          </View>
           <View style={[styles.containerActividades]}>
             <View style={styles.activitiesCard}>
-              <View style={styles.headerCard}>
-                <Text style={styles.subtituloCard}>Gym</Text>
-                <RightArrow color={"#949c7f"} />
-              </View>
+              <Link href="pages/addActivity">
+                <View style={styles.headerCard}>
+                  <Text style={styles.subtituloCard}>Gym</Text>
+                  <RightArrow color={"#949c7f"} />
+                </View>
+              </Link>
               <View style={styles.contentCard}>
                 <View style={styles.column}>
                   <Text>Por hacer</Text>
                   <CheckboxComponent
                     textStyle={styles.text}
-                    text="10 dominadas"
+                    text="Hacer 10 dominadas"
                   />
                   <CheckboxComponent
                     textStyle={styles.text}
-                    text="10 lagartijas"
+                    text="Hacer 10 lagartijas"
+                  />
+                  <CheckboxComponent
+                    textStyle={styles.text}
+                    text="Hacer 10 lagartijas"
                   />
                 </View>
                 <View style={styles.column}>
                   <Text>Tareas finalizadas</Text>
+                  <CheckboxComponent
+                    completed={true}
+                    textStyle={styles.textDone}
+                    text="Correr un maratón"
+                  />
                   <CheckboxComponent
                     completed={true}
                     textStyle={styles.textDone}
@@ -112,11 +141,6 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     fontWeight: "bold",
   },
-  subtitulo: {
-    fontSize: 15,
-    fontWeight: "bold",
-    marginVertical: 10,
-  },
   subtituloCard: {
     fontSize: 20,
     fontWeight: "bold",
@@ -125,9 +149,6 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 12,
-  },
-  textHeader: {
-    fontSize: 15,
   },
   textDone: {
     color: "#828282",
@@ -139,14 +160,15 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderColor: "#494F3C",
     padding: 10,
+    gap: 10,
   },
   containerActividades: {
-    gap: 10,
-    justifyContent: "center",
+    gap: 20,
   },
   headerCard: {
     flexDirection: "row",
     justifyContent: "space-between",
+    width: "100%",
     paddingHorizontal: 10,
     alignItems: "center",
   },
@@ -155,9 +177,11 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     borderColor: "black",
     paddingHorizontal: 30,
+    gap: 10,
   },
   column: {
     flex: 1,
-    flexWrap: "wrap",
+    flexWrap: "nowrap",
+    gap: 5,
   },
 });

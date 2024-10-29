@@ -14,11 +14,9 @@ const AppWrapper = () => {
 
   useEffect(() => {
     // Si el usuario está autenticado, redirige a la página principal
-    if (user) {
-      router.push("/(users)"); // Cambia esto a la ruta donde rediriges después de login
-    } else {
-      router.push("/"); // Asegúrate que esta sea la página de login
-    }
+    if (!user) {router.push("/")}
+    else if(user && user.user.rol === "Usuario"){router.push("/(users)")}
+    else if(user && user.user.rol === "Admin"){router.push("/(admins)")}
   }, [user, router]);
 
   return <Slot />;

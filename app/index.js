@@ -12,9 +12,14 @@ import * as Yup from "yup";
 import { useMutation } from "@tanstack/react-query";
 import { loginUser } from "./(services)/api/api";
 import { loginUserAction } from "./(services)/(redux)/authSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import { LogoSVG } from "../components/Icons";
+// import * as SecureStore from 'expo-secure-store';
 
+// const saveTokenToSecureStore = async (token, expirationTime) => {
+//   await SecureStore.setItemAsync('access_token', token);
+//   await SecureStore.setItemAsync('token_expiration', expirationTime.toString());
+// };
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -28,8 +33,6 @@ const validationSchema = Yup.object().shape({
 });
 
 export default function Index() {
-
-  
   const router = useRouter();
 
   const mutation = useMutation({
@@ -41,15 +44,13 @@ export default function Index() {
 
   return (
     <View style={styles.container}>
-
-
       <View style={styles.LogoContainer}>
         <LogoSVG color={"#949c7f"}/>
         <Text style={styles.Logo}>Progrezy</Text>
       </View>
       
       {mutation?.isError && (
-        <Text>
+        <Text style={styles.errorText}>
           {mutation?.error?.response?.data?.error || 'Ocurrió un error inesperado'}
         </Text>
       )}
@@ -62,12 +63,14 @@ export default function Index() {
           mutation.mutateAsync(values).then((data) => {
             if (data.user.rol === "Usuario") {
               dispatch(loginUserAction(data));
-              router.push("/(users)")
-            }
-            else{
+              // saveTokenToSecureStore(data.token, Date.now() + 60 * 60 * 1000); // token con expiración de 1 hora
+              router.push("/(users)");
+            } else {
+              dispatch(loginUserAction(data));
               router.push("/(admins)");
-              console.log(data);
             }
+          }).catch((error) => {
+            console.log(error)
           });
         }}
         validationSchema={validationSchema}
