@@ -10,11 +10,11 @@ import { Link, useRouter } from "expo-router";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { useMutation } from "@tanstack/react-query";
-import { loginUser, getUsers } from "./(services)/api/api";
+import { loginUser } from "./(services)/api/api";
 import { loginUserAction } from "./(services)/(redux)/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { LogoSVG } from "../components/Icons";
-import { useEffect, useState } from "react";
+
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -28,23 +28,7 @@ const validationSchema = Yup.object().shape({
 });
 
 export default function Index() {
-  // const [users, setUsers] = useState([])
-  // useEffect(() =>{
-  //   const fetchUsers = async() =>{
-  //     try{
-  //       const userData = await getUsers()
-  //       setUsers(userData)
-  //     }catch(error){
-  //       console.log("Error al conseguir los datos", error)
-  //     }
-  //   }
-  //   fetchUsers()
-  // },[])
 
-  //   // Monitorear cuando el estado de los usuarios cambie
-  // useEffect(() => {
-  //   console.log("Usuarios actualizados:", users);
-  // }, [users]);
   
   const router = useRouter();
 
@@ -55,22 +39,9 @@ export default function Index() {
 
   const dispatch = useDispatch();
 
-  useSelector((state) => console.log("Informacion guardada", state));
-  console.log(mutation);
-
   return (
     <View style={styles.container}>
-      {/* {
-        users.length > 0 ? (
-        users.map((user) => (
-          <View key={user._id}>
-            <Text style={{color:"black"}}>{user.username}</Text>
-            <Text>{user.email}</Text>
-          </View>
-        ))
-      )
-        : (<Text>Usuarios no encontrados</Text>)
-      } */}
+
 
       <View style={styles.LogoContainer}>
         <LogoSVG color={"#949c7f"}/>
@@ -94,7 +65,7 @@ export default function Index() {
               router.push("/(users)")
             }
             else{
-              router.push("/CondicionesUso/terms");
+              router.push("/(admins)");
               console.log(data);
             }
           });

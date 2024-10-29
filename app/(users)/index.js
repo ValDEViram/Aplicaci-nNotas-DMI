@@ -5,12 +5,10 @@ import { Main } from "../../components/Main";
 
 export default function TabHome() {
   return (
-    <SafeAreaProvider>
-      <View style={styles.container}>
+      <View>
         <StatusBar style="auto" />
         <Main />
       </View>
-    </SafeAreaProvider>
   );
 }
 

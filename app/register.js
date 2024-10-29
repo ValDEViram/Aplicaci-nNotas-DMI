@@ -11,9 +11,9 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import { registerUser } from "./(services)/api/api";
 import { useMutation } from "@tanstack/react-query";
-import { useState } from "react";
-import { MaterialIcons } from "@expo/vector-icons";
 import { LeftArrow, LogoSVG } from "../components/Icons";
+import { CheckboxComponent } from "../components/CheckboxComponent";
+import { useState } from "react";
 
 const validationSchema = Yup.object().shape({
   username: Yup.string()
@@ -35,6 +35,9 @@ const validationSchema = Yup.object().shape({
 export default function Register() {
   const [isTermsAccepted, setIsTermsAccepted] = useState(false);
 
+  const handleToggle = (accepted) => {
+    setIsTermsAccepted(accepted);
+  };
   const mutation = useMutation({
     mutationFn: registerUser,
     mutationKey: ["register"],
@@ -128,28 +131,11 @@ export default function Register() {
               <Text style={styles.errorText}>{errors.confirmPassword}</Text>
             ) : null}
 
-            <View style={styles.checkboxContainer}>
-              <Pressable
-                onPress={() => setIsTermsAccepted(!isTermsAccepted)}
-                style={styles.checkbox}
-                >
-                {isTermsAccepted ? (
-                  <MaterialIcons name="check-box" size={24} color="green" />
-                ) : (
-                  <MaterialIcons
-                  name="check-box-outline-blank"
-                  size={24}
-                  color="gray"
-                  />
-                )}
-              </Pressable>
-              <Text>
-                Acepto los{" "}
-                <Link href="/CondicionesUso/terms" style={styles.termsLink}>
-                  términos y condiciones
-                </Link>
-              </Text>
-            </View>
+            <CheckboxComponent
+              text="Acepto los"
+              link={{ href: "/CondicionesUso/terms", text: " términos y condiciones" }}
+              onToggle={handleToggle}
+            />
 
             <Pressable
               style={[styles.button, !isTermsAccepted && styles.buttonDisabled]}
@@ -257,18 +243,7 @@ const styles = StyleSheet.create({
   errorText: {
     color: "red"
   },
-  checkboxContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginVertical: 10,
-  },
-  checkbox: {
-    marginRight: 8,
-  },
-  termsLink: {
-    color: "blue",
-    textDecorationLine: "underline",
-  },
+
   buttonDisabled: {
     backgroundColor: "#f4f5f0"
   }

@@ -1,9 +1,12 @@
+import { StatusBar } from "expo-status-bar";
 import { View, Text } from "react-native";
+import { MyActivities } from "../../components/Activities";
 
 export default function Actividades() {
   return (
     <View>
-      <Text>Actividades 1, 2, 3, 4 probando</Text>
+      <StatusBar style="auto" />
+      <MyActivities />
     </View>
   );
 }

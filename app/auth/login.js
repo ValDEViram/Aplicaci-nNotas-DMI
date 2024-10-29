@@ -6,7 +6,7 @@ import {
   Pressable,
   ActivityIndicator,
 } from "react-native";
-import { Link, useRouter } from "expo-router";
+import { useRouter } from "expo-router";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { useMutation } from "@tanstack/react-query";

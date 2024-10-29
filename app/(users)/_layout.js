@@ -1,6 +1,6 @@
 import { Tabs } from "expo-router";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { ActividadesSVG, MasSVG, SettingsSVG } from "../../components/Icons";
+import { ActividadesSVG, SettingsSVG } from "../../components/Icons";
 
 
 export default function RootLayout() {
