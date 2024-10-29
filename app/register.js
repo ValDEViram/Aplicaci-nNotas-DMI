@@ -169,6 +169,7 @@ const styles = StyleSheet.create({
     shadowOffset: {width: 0, height:8},
     shadowOpacity: 0.5,
     shadowRadius: 3,
+    elevation: 5,
     backgroundColor: "#cfd3c3"
   },
   Logo: {
@@ -213,6 +214,7 @@ const styles = StyleSheet.create({
     shadowOffset: {width: 2, height:4},
     shadowOpacity: 0.2,
     shadowRadius: 3,
+    elevation: 5,
   },
   buttonText: {
     color: "#301D18",
@@ -233,6 +235,7 @@ const styles = StyleSheet.create({
     shadowOffset: {width: 2, height:4},
     shadowOpacity: 0.2,
     shadowRadius: 3,
+    elevation: 5,
   },
   texto: {
     color: "#778062",

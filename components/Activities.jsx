@@ -42,7 +42,9 @@ export function MyActivities() {
             <View style={styles.activitiesCard}>
               <Link href="pages/addActivity">
                 <View style={styles.headerCard}>
-                  <Text style={styles.subtituloCard}>Gym</Text>
+                  <Text style={styles.subtituloCard}>
+                    Aprender programaciónAprender programación
+                  </Text>
                   <RightArrow color={"#949c7f"} />
                 </View>
               </Link>
@@ -142,7 +144,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   subtituloCard: {
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: "bold",
     color: "#778062",
     textDecorationLine: "underline",
