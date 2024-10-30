@@ -1,19 +1,14 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  Dimensions,
-  ScrollView,
-} from "react-native";
+import { StyleSheet, Text, View, Dimensions, ScrollView } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { MasSVG, RightArrow } from "./Icons";
 import { CheckboxComponent } from "./CheckboxComponent";
 import { Link } from "expo-router";
+import { useActivities } from "../consts/activities";
 const { width } = Dimensions.get("window");
 
 export function MyActivities() {
   const insets = useSafeAreaInsets();
+  const { activities } = useActivities();
 
   return (
     <View style={[{ paddingTop: insets.top, paddingBottom: insets.bottom }]}>
@@ -39,93 +34,45 @@ export function MyActivities() {
             </Link>
           </View>
           <View style={[styles.containerActividades]}>
-            <View style={styles.activitiesCard}>
-              <Link href="pages/addActivity">
-                <View style={styles.headerCard}>
-                  <Text style={styles.subtituloCard}>
-                    Aprender programaciónAprender programación
-                  </Text>
-                  <RightArrow color={"#949c7f"} />
+            {activities.map((activity) =>
+              activity.visibility === "Privado" ? (
+                <View style={styles.activitiesCard} key={activity._id}>
+                  <Link href="pages/addActivity">
+                    <View style={styles.headerCard}>
+                      <Text style={styles.subtituloCard}>{activity.name}</Text>
+                      <RightArrow color={"#949c7f"} />
+                    </View>
+                  </Link>
+                  <View style={styles.contentCard}>
+                    <View style={styles.column}>
+                      <Text>Por hacer</Text>
+                      {activity.tasks.map((task, index) =>
+                        task.completed === "false" ? (
+                          <CheckboxComponent
+                            key={index}
+                            textStyle={styles.text}
+                            text={task.todoTasks}
+                          />
+                        ) : null
+                      )}
+                    </View>
+                    <View style={styles.column}>
+                      <Text>Tareas finalizadas</Text>
+                      {activity.tasks.map((task, index) =>
+                        task.completed === "true" ? (
+                          <CheckboxComponent
+                            key={index}
+                            completed={true}
+                            textStyle={styles.text}
+                            text={task.todoTasks}
+                          />
+                        ) : null
+                      )}
+                    </View>
+                  </View>
                 </View>
-              </Link>
-              <View style={styles.contentCard}>
-                <View style={styles.column}>
-                  <Text>Por hacer</Text>
-                  <CheckboxComponent
-                    textStyle={styles.text}
-                    text="Hacer 10 dominadas"
-                  />
-                  <CheckboxComponent
-                    textStyle={styles.text}
-                    text="Hacer 10 lagartijas"
-                  />
-                  <CheckboxComponent
-                    textStyle={styles.text}
-                    text="Hacer 10 lagartijas"
-                  />
-                </View>
-                <View style={styles.column}>
-                  <Text>Tareas finalizadas</Text>
-                  <CheckboxComponent
-                    completed={true}
-                    textStyle={styles.textDone}
-                    text="Correr un maratón"
-                  />
-                  <CheckboxComponent
-                    completed={true}
-                    textStyle={styles.textDone}
-                    text="Correr un maratón"
-                  />
-                  <CheckboxComponent
-                    completed={true}
-                    textStyle={styles.textDone}
-                    text="Ir 5 días a la semana por un mes"
-                  />
-                </View>
-              </View>
-            </View>
-            <View style={styles.activitiesCard}>
-              <Image
-                style={styles.tinyLogo}
-                source={{
-                  uri: "https://images.unsplash.com/photo-1719937206158-cad5e6775044?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxfHx8ZW58MHx8fHx8s",
-                }}
-              />
-              <View>
-                <Text style={styles.subtituloCard}>Gym</Text>
-                <Text style={styles.text}>5 actividades pendientes</Text>
-                <Text style={styles.text}>10 actividades finalizadas</Text>
-                <Text style={styles.text}>3 logros obtenidos</Text>
-              </View>
-            </View>
-            <View style={styles.activitiesCard}>
-              <Image
-                style={styles.tinyLogo}
-                source={{
-                  uri: "https://images.unsplash.com/photo-1719937206158-cad5e6775044?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxfHx8ZW58MHx8fHx8s",
-                }}
-              />
-              <View>
-                <Text style={styles.subtituloCard}>Gym</Text>
-                <Text style={styles.text}>5 actividades pendientes</Text>
-                <Text style={styles.text}>10 actividades finalizadas</Text>
-                <Text style={styles.text}>3 logros obtenidos</Text>
-              </View>
-            </View>
-            <View style={styles.activitiesCard}>
-              <Image
-                style={styles.tinyLogo}
-                source={{
-                  uri: "https://images.unsplash.com/photo-1719937206158-cad5e6775044?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxfHx8ZW58MHx8fHx8s",
-                }}
-              />
-              <View>
-                <Text style={styles.subtituloCard}>Gym</Text>
-                <Text style={styles.text}>5 actividades pendientes</Text>
-                <Text style={styles.text}>10 actividades finalizadas</Text>
-                <Text style={styles.text}>3 logros obtenidos</Text>
-              </View>
-            </View>
+              ) : null
+            )}
           </View>
         </ScrollView>
       </View>

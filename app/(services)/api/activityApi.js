@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const addActivity = async ({ name, tasks }) => {
-  const response = await axios.post("http://localhost:3000/addActivity", {
+  const response = await axios.post("http://localhost:3000/addPlan", {
     name,
     tasks,
   }, {headers: { "Content-Type": "application/json"}});
@@ -17,9 +17,9 @@ const addActivity = async ({ name, tasks }) => {
 //   return response.data;
 // };
 
-// const getUsers = async () => {
-//   const response = await axios.get("http://localhost:3000/getAllUsers");
-//   return response.data;
-// };
+const getTasksPlans = async () => {
+  const response = await axios.get("http://localhost:3000/getTasksPlans");
+  return response.data;
+};
 
-export { addActivity };
+export { addActivity, getTasksPlans };

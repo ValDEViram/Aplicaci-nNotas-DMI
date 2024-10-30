@@ -3,6 +3,8 @@
 # dependencies
 node_modules/
 .eslintrc.json
+eas.json
+google-services.json
 
 # Expo
 .expo/

@@ -72,7 +72,7 @@ export default function Actividades() {
             touched,
             setFieldValue,
           }) => (
-            <View style={styles.form}>
+            <View style={styles.containerForm}>
               <Text style={styles.label}>Nombre del plan</Text>
               <TextInput
                 style={styles.input}
@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
   },
-  form: {
+  containerForm: {
     padding: 10,
     gap: 10,
   },

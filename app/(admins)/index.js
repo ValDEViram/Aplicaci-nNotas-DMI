@@ -2,11 +2,18 @@ import { useEffect, useState } from "react";
 import { getUsers } from "../(services)/api/api";
 import {Text,View, SectionList, StyleSheet,} from "react-native";
 import { UserProfileSVG } from "../../components/Icons";
+import { useDispatch } from "react-redux";
+import { loadUser } from "../(services)/(redux)/authSlice";
 
         
 
 export default function AllUsers() {
+    const dispatch = useDispatch()
     const [users, setUsers] = useState([])
+
+    // useEffect(() => {
+    //   dispatch(loadUser())
+    // },[dispatch])
 
     useEffect(() =>{
       const fetchUsers = async() =>{

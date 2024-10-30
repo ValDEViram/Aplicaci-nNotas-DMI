@@ -7,11 +7,12 @@ import {
   ScrollView,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-
+import { useActivities } from "../consts/activities";
 const { width } = Dimensions.get("window");
 
 export function Main() {
   const insets = useSafeAreaInsets();
+  const { activities } = useActivities();
 
   return (
     <View style={[{ paddingTop: insets.top, paddingBottom: insets.bottom }]}>
@@ -24,62 +25,33 @@ export function Main() {
         </View> */}
           <Text style={styles.subtitulo}>Actividades recientes</Text>
           <View style={styles.containerActividades}>
-            <View style={styles.activitiesCard}>
-              <Image
-                style={styles.tinyLogo}
-                source={{
-                  uri: "https://images.unsplash.com/photo-1719937206158-cad5e6775044?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxfHx8ZW58MHx8fHx8s",
-                }}
-              />
-              <View>
-                <Text style={styles.subtituloCard}>Gym</Text>
-                <Text style={styles.text}>5 actividades pendientes</Text>
-                <Text style={styles.text}>10 actividades finalizadas</Text>
-                <Text style={styles.text}>3 logros obtenidos</Text>
+            {activities.map((activity) => (
+              <View style={styles.activitiesCard} key={activity._id}>
+                <Image
+                  style={styles.tinyLogo}
+                  source={{
+                    uri: "https://images.unsplash.com/photo-1719937206158-cad5e6775044?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxfHx8ZW58MHx8fHx8s",
+                  }}
+                />
+                <View style={styles.wrapperActivityTask}>
+                  <Text style={styles.subtituloCard} numberOfLines={1}>
+                    {activity.name}
+                  </Text>
+                  <View>
+                    <Text style={styles.text}>
+                      {
+                        activity.tasks.filter(
+                          (task) => task.completed === "false"
+                        ).length
+                      }{" "}
+                      actividades pendientes
+                    </Text>
+                    <Text style={styles.text}>10 actividades finalizadas</Text>
+                    <Text style={styles.text}>3 logros obtenidos</Text>
+                  </View>
+                </View>
               </View>
-            </View>
-            <View style={styles.activitiesCard}>
-              <Image
-                style={styles.tinyLogo}
-                source={{
-                  uri: "https://images.unsplash.com/photo-1719937206158-cad5e6775044?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxfHx8ZW58MHx8fHx8s",
-                }}
-              />
-              <View>
-                <Text style={styles.subtituloCard}>Gym</Text>
-                <Text style={styles.text}>5 actividades pendientes</Text>
-                <Text style={styles.text}>10 actividades finalizadas</Text>
-                <Text style={styles.text}>3 logros obtenidos</Text>
-              </View>
-            </View>
-            <View style={styles.activitiesCard}>
-              <Image
-                style={styles.tinyLogo}
-                source={{
-                  uri: "https://images.unsplash.com/photo-1719937206158-cad5e6775044?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxfHx8ZW58MHx8fHx8s",
-                }}
-              />
-              <View>
-                <Text style={styles.subtituloCard}>Gym</Text>
-                <Text style={styles.text}>5 actividades pendientes</Text>
-                <Text style={styles.text}>10 actividades finalizadas</Text>
-                <Text style={styles.text}>3 logros obtenidos</Text>
-              </View>
-            </View>
-            <View style={styles.activitiesCard}>
-              <Image
-                style={styles.tinyLogo}
-                source={{
-                  uri: "https://images.unsplash.com/photo-1719937206158-cad5e6775044?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxfHx8ZW58MHx8fHx8s",
-                }}
-              />
-              <View>
-                <Text style={styles.subtituloCard}>Gym</Text>
-                <Text style={styles.text}>5 actividades pendientes</Text>
-                <Text style={styles.text}>10 actividades finalizadas</Text>
-                <Text style={styles.text}>3 logros obtenidos</Text>
-              </View>
-            </View>
+            ))}
           </View>
           <Text style={styles.subtitulo}>Tareas por realizar</Text>
           <View style={styles.containerTareas}>
@@ -122,13 +94,14 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   subtituloCard: {
-    fontSize: 15,
+    fontSize: 12,
     fontWeight: "bold",
-    marginVertical: 0,
+    color: "#778062",
+    textDecorationLine: "underline",
   },
   text: {
     color: "#828282",
-    fontSize: 12,
+    fontSize: 10,
   },
   buscar: {
     backgroundColor: "#F4F5F0",
@@ -144,9 +117,16 @@ const styles = StyleSheet.create({
   },
   activitiesCard: {
     borderWidth: 3,
-    borderRadius: 10,
+    borderRadius: 8,
     borderColor: "#494F3C",
     padding: 10,
+    width: "45%",
+    shadowColor: "#1B1D16",
+    gap: 10,
+    shadowOffset: { width: 2, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+    elevation: 5,
   },
   containerActividades: {
     flex: 1,
@@ -177,5 +157,9 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     paddingHorizontal: 10,
     paddingVertical: 5,
+  },
+  wrapperActivityTask: {
+    flexDirection: "column",
+    justifyContent: "space-around",
   },
 });
