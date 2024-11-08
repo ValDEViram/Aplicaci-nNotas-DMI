@@ -10,6 +10,13 @@ export function MyActivities() {
   const insets = useSafeAreaInsets();
   const { activities } = useActivities();
 
+  activities.map((activity) => {
+    const incompleteTasks = activity.tasks
+      .filter((task) => task.completed === "false")
+      .slice(0, 3);
+    console.log(`Tareas incompletas en ${activity.name}:`, incompleteTasks);
+    return incompleteTasks;
+  });
   return (
     <View style={[{ paddingTop: insets.top, paddingBottom: insets.bottom }]}>
       <View style={[styles.container, width]}>
@@ -35,7 +42,7 @@ export function MyActivities() {
           </View>
           <View style={[styles.containerActividades]}>
             {activities.map((activity) =>
-              activity.visibility === "Privado" ? (
+              activity.visibility === "Public" ? (
                 <View style={styles.activitiesCard} key={activity._id}>
                   <Link href="pages/addActivity">
                     <View style={styles.headerCard}>
@@ -46,28 +53,30 @@ export function MyActivities() {
                   <View style={styles.contentCard}>
                     <View style={styles.column}>
                       <Text>Por hacer</Text>
-                      {activity.tasks.map((task, index) =>
-                        task.completed === "false" ? (
+                      {activity.tasks
+                        .filter((task) => task.completed === "false")
+                        .slice(0, 3)
+                        .map((task, index) => (
                           <CheckboxComponent
                             key={index}
                             textStyle={styles.text}
-                            text={task.todoTasks}
+                            text={task.todoTasks || task.task}
                           />
-                        ) : null
-                      )}
+                        ))}
                     </View>
                     <View style={styles.column}>
                       <Text>Tareas finalizadas</Text>
-                      {activity.tasks.map((task, index) =>
-                        task.completed === "true" ? (
+                      {activity.tasks
+                        .filter((task) => task.completed === "true")
+                        .slice(0, 3)
+                        .map((task, index) => (
                           <CheckboxComponent
                             key={index}
                             completed={true}
-                            textStyle={styles.text}
+                            textStyle={styles.textDone}
                             text={task.todoTasks}
                           />
-                        ) : null
-                      )}
+                        ))}
                     </View>
                   </View>
                 </View>

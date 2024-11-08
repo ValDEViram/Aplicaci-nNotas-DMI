@@ -2,9 +2,11 @@ import { Tabs } from "expo-router";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { ActividadesSVG, BuscarSVG, SettingsSVG } from "../../components/Icons";
 import { ActivitiesProvider } from "../../consts/activities";
+import { PersonalActivitiesProvider } from "../../consts/personalActivities";
 
 export default function RootLayout() {
   return (
+    <PersonalActivitiesProvider>
     <ActivitiesProvider>
       <Tabs
         screenOptions={{
@@ -13,7 +15,6 @@ export default function RootLayout() {
           tabBarStyle: {
             backgroundColor: "#1B1D16",
           },
-          tabBarShowLabel: false,
         }}
       >
         <Tabs.Screen
@@ -52,5 +53,6 @@ export default function RootLayout() {
         />
       </Tabs>
     </ActivitiesProvider>
+    </PersonalActivitiesProvider>
   );
 }

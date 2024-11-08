@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const loginUser = async ({ email, password }) => {
-  const response = await axios.post("http://localhost:3000/login", {
+  const response = await axios.post("http://localhost:3000/users/login", {
     email,
     password,
   }, {headers: { "Content-Type": "application/json"}});
@@ -9,7 +9,7 @@ const loginUser = async ({ email, password }) => {
 };
 
 const registerUser = async ({ username, email, password }) => {
-  const response = await axios.post("http://localhost:3000/register", {
+  const response = await axios.post("http://localhost:3000/users/register", {
     username,
     email,
     password,
@@ -18,7 +18,7 @@ const registerUser = async ({ username, email, password }) => {
 };
 
 const getUsers = async () => {
-  const response = await axios.get("http://localhost:3000/getAllUsers");
+  const response = await axios.get("http://localhost:3000/users/getAllUsers");
   return response.data;
 };
 

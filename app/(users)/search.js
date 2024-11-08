@@ -1,10 +1,13 @@
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 import { Main } from "../../components/Main";
+import { useActivities } from "../../consts/activities";
 
 export default function Search() {
+  const { activities = [] } = useActivities();
+
   return (
       <View>
-        <Main />
+        <Main context="search" activities={activities}/>
       </View>
   );
 }
